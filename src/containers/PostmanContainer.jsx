@@ -3,6 +3,7 @@ import Controls from '../components/presentational/Controls';
 import Display from '../components/presentational/Display';
 import History from '../components/presentational/History';
 import { makeFetch } from '../services/makeFetch';
+import styles from './Container.css'
 
 export default class PostmanContainer extends Component {
     state = {
@@ -57,8 +58,8 @@ export default class PostmanContainer extends Component {
     };
     render() {
         return (
-            <div>
-                <div className="left">
+            <div className={styles.container}>
+                <div className={styles.left}>
                     <Controls
                         urlValue={this.state.urlValue}
                         selectedRadio={this.state.selectedRadio}
@@ -70,7 +71,7 @@ export default class PostmanContainer extends Component {
                     />
                     <Display response={this.state.response} />
                 </div>
-                <History history={this.state.history} onHistoryClick={this.handleHistoryClick} />
+                <History className={styles.right} history={this.state.history} onHistoryClick={this.handleHistoryClick} />
             </div>
         );
     }

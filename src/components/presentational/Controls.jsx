@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './components.css'
 
 const Controls = ({
     urlValue,
@@ -11,7 +12,7 @@ const Controls = ({
     onFormSubmit
 }) => {
     return (
-        <div>
+        <div className={styles.controls}>
             <form onSubmit={onFormSubmit}>
                 <div className="request-bar">
                     <input
@@ -21,7 +22,7 @@ const Controls = ({
                     />
                     <button>Send Request</button>
                 </div>
-                <div className="radios">
+                <div className={styles.radios}>
                     <label htmlFor="GET">
                         GET
                         <input
@@ -68,7 +69,7 @@ const Controls = ({
                     id="json-body"
                     value={jsonBodyValue}
                     onChange={onBodyValueChange}
-                    cols="30"
+                    cols="60"
                     rows="10"
                 ></textarea>
             </form>
