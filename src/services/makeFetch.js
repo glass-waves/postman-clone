@@ -11,6 +11,6 @@ export const makeFetch = async ({ url, method, body  }) => {
             }
         })
     }
-    const json = await res.json;
+    const json = await res.json();
     return JSON.stringify(json, null, 2);
 }        

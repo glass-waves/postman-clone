@@ -1,24 +1,27 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+import ListItem from './ListItem';
 
-const History = ({ history }) => {
+const History = ({ history, onHistoryClick }) => {
     return (
-        <div className="right">
-            {!!history.length && history.map( request => ({
-                method: request.method,
-                url: request.url,
-                body: request.body
-            }))}
-        </div>
-    )
-}
+        <ul className="right">
+            {!!history.length &&
+                history.map((request) => 
+                    <ListItem key={request.id} request={request} onClick={onHistoryClick} /> )}
+        </ul>
+    );
+};
 
 History.propTypes = {
-    history: PropTypes.shape({
-        method: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
-        body: PropTypes.string
-    })
-}
+    history: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            method: PropTypes.string,
+            url: PropTypes.string,
+            body: PropTypes.string,
+        })
+    ),
+    onHistoryClick: PropTypes.func.isRequired,
+};
 
-export default History
+export default History;

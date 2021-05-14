@@ -39,7 +39,7 @@ const Controls = ({
                             value="POST"
                             type="radio"
                             checked={selectedRadio === 'POST'}
-                            onChange={handleRadioChange}
+                            onChange={onRadioChange}
                         />
                     </label>
                     <label htmlFor="PUT">
@@ -49,7 +49,7 @@ const Controls = ({
                             value="PUT"
                             type="radio"
                             checked={selectedRadio === 'PUT'}
-                            onChange={handleRadioChange}
+                            onChange={onRadioChange}
                         />
                     </label>
                     <label htmlFor="DELETE">
@@ -59,7 +59,7 @@ const Controls = ({
                             value="DELETE"
                             type="radio"
                             checked={selectedRadio === 'DELETE'}
-                            onChange={handleRadioChange}
+                            onChange={onRadioChange}
                         />
                     </label>
                 </div>
@@ -80,10 +80,10 @@ Controls.propTypes = {
     urlValue: PropTypes.string.isRequired,
     selectedRadio: PropTypes.string.isRequired,
     jsonBodyValue: PropTypes.string,
-    handleRequestBarChange: PropTypes.func.isRequired,
-    handleRadioChange: PropTypes.func.isRequired,
-    handleBodyValueChange: PropTypes.func.isRequired,
-    handleFormSubmit: PropTypes.func.isRequired
+    onRequestBarChange: PropTypes.func.isRequired,
+    onRadioChange: PropTypes.func.isRequired,
+    onBodyValueChange: PropTypes.func.isRequired,
+    onFormSubmit: PropTypes.func.isRequired
 };
 
 export default Controls;

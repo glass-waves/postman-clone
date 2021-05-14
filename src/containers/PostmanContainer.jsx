@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Controls from '../components/presentational/Controls';
 import Display from '../components/presentational/Display';
+import History from '../components/presentational/History';
 import { makeFetch } from '../services/makeFetch';
 
 export default class PostmanContainer extends Component {
@@ -15,17 +15,24 @@ export default class PostmanContainer extends Component {
 
     handleRequestChange = ({ target }) => {
         this.setState({
-            urlValue: target.value
-        })
-    }
+            urlValue: target.value,
+        });
+    };
     handleRadioChange = ({ target }) => {
         this.setState({
-            selectedRadio: target.value
-        })
-    }
+            selectedRadio: target.value,
+        });
+    };
     handleBodyValueChange = ({ target }) => {
         this.setState({
-            jsonBodyValue: target.value
+            jsonBodyValue: target.value,
+        });
+    };
+    handleHistoryClick = ({ method, url, body }) => {
+        this.setState({
+            urlValue: url,
+            selectedRadio: method,
+            body
         })
     }
     handleFormSubmit = async (e) => {
@@ -33,27 +40,37 @@ export default class PostmanContainer extends Component {
         const response = await makeFetch({
             url: this.state.urlValue,
             method: this.state.selectedRadio,
-            body: this.state.jsonBodyValue
+            body: this.state.jsonBodyValue,
         });
-    }
+        this.setState((prevState) => ({
+            response,
+            history: [
+                ...prevState.history,
+                {
+                    id: Math.random() * 100000,
+                    url: this.state.urlValue,
+                    method: this.state.selectedRadio,
+                    body: this.state.jsonBodyValue,
+                },
+            ],
+        }));
+    };
     render() {
         return (
             <div>
                 <div className="left">
-                    <Controls 
-                        urlValue={this.state.urlValue} 
+                    <Controls
+                        urlValue={this.state.urlValue}
                         selectedRadio={this.state.selectedRadio}
                         jsonBodyValue={this.state.jsonBodyValue}
                         onRequestBarChange={this.handleRequestChange}
                         onRadioChange={this.handleRadioChange}
                         onBodyValueChange={this.handleBodyValueChange}
                         onFormSubmit={this.handleFormSubmit}
-                        />
-                    <Display 
-                        response={this.state.response}
                     />
+                    <Display response={this.state.response} />
                 </div>
-                <History history={this.state.history}/>
+                <History history={this.state.history} onHistoryClick={this.handleHistoryClick} />
             </div>
         );
     }
