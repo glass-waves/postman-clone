@@ -5,19 +5,19 @@ const Controls = ({
     urlValue,
     selectedRadio,
     jsonBodyValue,
-    handleRequestBarChange,
-    handleRadioChange,
-    handleBodyValueChange,
-    handleFormSubmit
+    onRequestBarChange,
+    onRadioChange,
+    onBodyValueChange,
+    onFormSubmit
 }) => {
     return (
         <div>
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={onFormSubmit}>
                 <div className="request-bar">
                     <input
                         type="text"
                         value={urlValue}
-                        onChange={handleRequestBarChange}
+                        onChange={onRequestBarChange}
                     />
                     <button>Send Request</button>
                 </div>
@@ -29,7 +29,7 @@ const Controls = ({
                             value="GET"
                             type="radio"
                             checked={selectedRadio === 'GET'}
-                            onChange={handleRadioChange}
+                            onChange={onRadioChange}
                         />
                     </label>
                     <label htmlFor="POST">
@@ -67,7 +67,7 @@ const Controls = ({
                     name="json-body"
                     id="json-body"
                     value={jsonBodyValue}
-                    onChange={handleBodyValueChange}
+                    onChange={onBodyValueChange}
                     cols="30"
                     rows="10"
                 ></textarea>

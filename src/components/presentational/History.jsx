@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const History = ({ history }) => {
     return (
-        <div>
+        <div className="right">
             {!!history.length && history.map( request => ({
                 method: request.method,
                 url: request.url,
