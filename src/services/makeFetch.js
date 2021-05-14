@@ -1,8 +1,9 @@
 export const makeFetch = async ({ url, method, body  }) => {
+    let res;
     if(method === 'GET' || method === 'DELETE'){
-        const res = await fetch(`${url}`);
+        res = await fetch(`${url}`);
     } else {
-        const res = await fetch(`${url}`, {
+        res = await fetch(`${url}`, {
             method,
             body,
             headers: {
@@ -10,5 +11,6 @@ export const makeFetch = async ({ url, method, body  }) => {
             }
         })
     }
-    return await res.json;
+    const json = await res.json;
+    return JSON.stringify(json, null, 2);
 }        

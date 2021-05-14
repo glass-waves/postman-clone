@@ -8,10 +8,11 @@ const Controls = ({
     handleRequestBarChange,
     handleRadioChange,
     handleBodyValueChange,
+    handleFormSubmit
 }) => {
     return (
         <div>
-            <form action="">
+            <form onSubmit={handleFormSubmit}>
                 <div className="request-bar">
                     <input
                         type="text"
@@ -82,6 +83,7 @@ Controls.propTypes = {
     handleRequestBarChange: PropTypes.func.isRequired,
     handleRadioChange: PropTypes.func.isRequired,
     handleBodyValueChange: PropTypes.func.isRequired,
+    handleFormSubmit: PropTypes.func.isRequired
 };
 
 export default Controls;
