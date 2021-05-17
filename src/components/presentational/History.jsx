@@ -1,14 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ListItem from './ListItem';
+import styles from './components.css';
 
 const History = ({ history, onHistoryClick }) => {
     return (
-        <ul className="right">
-            {!!history.length &&
-                history.map((request) => 
-                    <ListItem key={request.id} request={request} onClick={onHistoryClick} /> )}
-        </ul>
+        <div className={styles.history}>
+            <h2>Request History</h2>
+            <ul>
+                {!!history.length &&
+                    history.map((request) => (
+                        <ListItem
+                            key={request.id}
+                            request={request}
+                            onClick={onHistoryClick}
+                        />
+                    ))}
+            </ul>
+        </div>
     );
 };
 

@@ -3,7 +3,7 @@ import Controls from '../components/presentational/Controls';
 import Display from '../components/presentational/Display';
 import History from '../components/presentational/History';
 import { makeFetch } from '../services/makeFetch';
-import styles from './Container.css'
+import styles from './Container.css';
 
 export default class PostmanContainer extends Component {
     state = {
@@ -33,9 +33,9 @@ export default class PostmanContainer extends Component {
         this.setState({
             urlValue: url,
             selectedRadio: method,
-            body
-        })
-    }
+            body,
+        });
+    };
     handleFormSubmit = async (e) => {
         e.preventDefault();
         const response = await makeFetch({
@@ -58,20 +58,36 @@ export default class PostmanContainer extends Component {
     };
     render() {
         return (
-            <div className={styles.container}>
-                <div className={styles.left}>
-                    <Controls
-                        urlValue={this.state.urlValue}
-                        selectedRadio={this.state.selectedRadio}
-                        jsonBodyValue={this.state.jsonBodyValue}
-                        onRequestBarChange={this.handleRequestChange}
-                        onRadioChange={this.handleRadioChange}
-                        onBodyValueChange={this.handleBodyValueChange}
-                        onFormSubmit={this.handleFormSubmit}
+            <div>
+                <header>
+                    <div className={styles.leftHeader}>
+                        <h1>RESTeasy</h1>
+                        <img
+                            src="https://icon-library.com/images/sleeping-icon-png/sleeping-icon-png-24.jpg"
+                            alt="sleeping person icon"
+                        />
+                    </div>
+                    <div></div>
+                </header>
+                <div className={styles.container}>
+                    <div className={styles.left}>
+                        <Controls
+                            urlValue={this.state.urlValue}
+                            selectedRadio={this.state.selectedRadio}
+                            jsonBodyValue={this.state.jsonBodyValue}
+                            onRequestBarChange={this.handleRequestChange}
+                            onRadioChange={this.handleRadioChange}
+                            onBodyValueChange={this.handleBodyValueChange}
+                            onFormSubmit={this.handleFormSubmit}
+                        />
+                        <Display response={this.state.response} />
+                    </div>
+                    <History
+                        className={styles.right}
+                        history={this.state.history}
+                        onHistoryClick={this.handleHistoryClick}
                     />
-                    <Display response={this.state.response} />
                 </div>
-                <History className={styles.right} history={this.state.history} onHistoryClick={this.handleHistoryClick} />
             </div>
         );
     }

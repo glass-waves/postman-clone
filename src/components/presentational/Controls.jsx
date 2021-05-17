@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './components.css'
+import styles from './components.css';
+import Radio from '@material-ui/core/Radio';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 
 const Controls = ({
     urlValue,
@@ -9,23 +13,25 @@ const Controls = ({
     onRequestBarChange,
     onRadioChange,
     onBodyValueChange,
-    onFormSubmit
+    onFormSubmit,
 }) => {
     return (
         <div className={styles.controls}>
             <form onSubmit={onFormSubmit}>
-                <div className="request-bar">
-                    <input
+                <div className={styles.searchBar}>
+                    <TextField
                         type="text"
                         value={urlValue}
                         onChange={onRequestBarChange}
+                        placeholder="Request url..."
+                        className={styles.request}
                     />
-                    <button>Send Request</button>
+                    <Button type="submit" className={styles.BlueButton} variant="contained" color="primary">Send Request</Button>
                 </div>
                 <div className={styles.radios}>
                     <label htmlFor="GET">
                         GET
-                        <input
+                        <Radio
                             id="GET"
                             value="GET"
                             type="radio"
@@ -35,7 +41,7 @@ const Controls = ({
                     </label>
                     <label htmlFor="POST">
                         POST
-                        <input
+                        <Radio
                             id="POST"
                             value="POST"
                             type="radio"
@@ -45,7 +51,7 @@ const Controls = ({
                     </label>
                     <label htmlFor="PUT">
                         PUT
-                        <input
+                        <Radio
                             id="PUT"
                             value="PUT"
                             type="radio"
@@ -55,7 +61,7 @@ const Controls = ({
                     </label>
                     <label htmlFor="DELETE">
                         DELETE
-                        <input
+                        <Radio
                             id="DELETE"
                             value="DELETE"
                             type="radio"
@@ -64,14 +70,17 @@ const Controls = ({
                         />
                     </label>
                 </div>
-                <textarea
+                <TextField
                     name="json-body"
                     id="json-body"
                     value={jsonBodyValue}
                     onChange={onBodyValueChange}
-                    cols="60"
-                    rows="10"
-                ></textarea>
+                    multiline
+                    label="{ Request Body }"
+                    rows={6}
+                    fullWidth={true}
+                    variant="outlined"
+                ></TextField>
             </form>
         </div>
     );
@@ -84,7 +93,7 @@ Controls.propTypes = {
     onRequestBarChange: PropTypes.func.isRequired,
     onRadioChange: PropTypes.func.isRequired,
     onBodyValueChange: PropTypes.func.isRequired,
-    onFormSubmit: PropTypes.func.isRequired
+    onFormSubmit: PropTypes.func.isRequired,
 };
 
 export default Controls;
